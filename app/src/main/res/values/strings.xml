@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SaveTheDateApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="splash_screen_txt"> Made with &#10084;&#65039; by Vinicius Tavares</string>
+    <string name="main_button_txt"> Get date from Calendar!</string>
+</resources>
