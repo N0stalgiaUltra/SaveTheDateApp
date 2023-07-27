@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:visibility="visible"
     android:orientation="vertical"
-    android:layout_margin="10dp"
+    android:layout_margin="2dp"
     tools:context=".ui.MainScreen">
 
     <!-- TODO: Update blank fragment layout -->
@@ -21,6 +21,23 @@
             android:id="@+id/tv_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+
+            android:text="You save the date, we countdown the date! "
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:visibility="invisible"
+            />
+
+            <TextView
+            android:id="@+id/tv_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center|top"
             android:layout_marginTop="50dp"
             android:text="Select the data by clicking in the button"
@@ -31,11 +48,13 @@
 
         <!-- Countdown Texts -->
         <LinearLayout
+            android:id="@+id/selected_texts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="1"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="50dp"
+            android:visibility="invisible">
             <!-- Left Side Texts -->
             <LinearLayout
                 android:layout_width="0dp"
@@ -47,7 +66,7 @@
                     android:id="@+id/tv_countdown_year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:text="Years: 1"
                     android:textSize="30sp"
                     android:textStyle="bold"
@@ -58,8 +77,8 @@
                     android:id="@+id/tv_countdown_month"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="Months: 10"
+                    android:layout_margin="5dp"
+                    android:text="Months: 100"
                     android:textAlignment="textStart"
                     android:textSize="30sp"
                     android:textStyle="bold"
@@ -69,7 +88,7 @@
                     android:id="@+id/tv_countdown_days"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:text="Days: 30"
                     android:textAlignment="textStart"
                     android:textSize="30sp"
@@ -91,7 +110,7 @@
                     android:id="@+id/tv_countdown_hours"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:text="Hours: 23"
                     android:textSize="30sp"
                     android:textStyle="bold"
@@ -100,7 +119,7 @@
                     android:id="@+id/tv_countdown_minutes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:text="Minutes: 60"
                     android:textSize="30sp"
                     android:textStyle="bold"
@@ -109,7 +128,7 @@
                     android:id="@+id/tv_countdown_seconds"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:text="Seconds: 30"
                     android:textSize="30sp"
                     android:textStyle="bold"

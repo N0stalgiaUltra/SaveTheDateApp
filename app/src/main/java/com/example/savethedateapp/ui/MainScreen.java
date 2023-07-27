@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.savethedateapp.R;
@@ -28,7 +29,10 @@ public class MainScreen extends AppCompatActivity {
     private TextView hoursTextView;
     private TextView minutesTextView;
     private TextView secondsTextView;
+    private TextView headerTextView;
+    private TextView placeHolderTextView;
     private CountDownTimer countDownTimer;
+    private LinearLayout textsLayout;
 
 
     @Override
@@ -39,12 +43,21 @@ public class MainScreen extends AppCompatActivity {
         setContentView(R.layout.fragment_main_screen);
 
         startButton = findViewById(R.id.btn_start_count);
+        textsLayout = findViewById(R.id.selected_texts);
+
+        //Text Views
         yearsTextView = findViewById(R.id.tv_countdown_year);
         monthsTextView = findViewById(R.id.tv_countdown_month);
         daysTextView = findViewById(R.id.tv_countdown_days);
         hoursTextView = findViewById(R.id.tv_countdown_hours);
         minutesTextView = findViewById(R.id.tv_countdown_minutes);
         secondsTextView = findViewById(R.id.tv_countdown_seconds);
+        headerTextView = findViewById(R.id.tv_header);
+        placeHolderTextView = findViewById(R.id.tv_placeholder);
+
+
+        textsLayout.setVisibility(View.INVISIBLE);
+        headerTextView.setVisibility(View.INVISIBLE);
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +69,7 @@ public class MainScreen extends AppCompatActivity {
 
     private void StartCountdown(){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String targetDateString = "2023-08-13 22:15:00";
+        String targetDateString = "2023-07-27 22:35:00";
 
         try {
             Date targetDateTime = dateFormat.parse(targetDateString);
@@ -72,20 +85,23 @@ public class MainScreen extends AppCompatActivity {
             countDownTimer = new CountDownTimer(countdownMilis, 1000) {
                 @Override
                 public void onTick(long l) {
-                    yearsTextView.setText(formatTime(l, 'y'));
-                    monthsTextView.setText(formatTime(l, 'M'));
-                    daysTextView.setText(formatTime(l, 'd'));
-                    hoursTextView.setText(formatTime(l, 'h'));
-                    minutesTextView.setText(formatTime(l, 'm'));
-                    secondsTextView.setText(formatTime(l, 's'));
-                    //setar os textos
-                    //setar a visibility
+                    yearsTextView.setText("Years: " + formatTime(l, 'y'));
+                    monthsTextView.setText("Months: " +formatTime(l, 'M'));
+                    daysTextView.setText("Days: " +formatTime(l, 'd'));
+                    hoursTextView.setText("Hours: " +formatTime(l, 'h'));
+                    minutesTextView.setText("Minutes: " + formatTime(l, 'm'));
+                    secondsTextView.setText("Seconds: " +formatTime(l, 's'));
+
+                    textsLayout.setVisibility(View.VISIBLE);
+                    headerTextView.setVisibility(View.VISIBLE);
+                    placeHolderTextView.setVisibility(View.GONE);
                 }
 
                 @Override
                 public void onFinish() {
-                    //setar o header text view para contagem encerrada!
-                    //tirar a visibility dos textviews
+                    textsLayout.setVisibility(View.INVISIBLE);
+                    headerTextView.setVisibility(View.INVISIBLE);
+                    placeHolderTextView.setVisibility(View.VISIBLE);
                 }
             };
             countDownTimer.start();
