@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:visibility="visible"
     android:orientation="vertical"
+    android:layout_margin="10dp"
     tools:context=".ui.MainScreen">
 
     <!-- TODO: Update blank fragment layout -->
@@ -15,18 +16,114 @@
         android:background="@color/teal_200"
         android:orientation="vertical" >
 
+        <!-- Header -->
         <TextView
+            android:id="@+id/tv_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|top"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:text="Select the data by clicking in the button"
             android:textSize="20sp"
             android:textStyle="bold"
-
+            android:visibility="visible"
             />
+
+        <!-- Countdown Texts -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_marginTop="50dp">
+            <!-- Left Side Texts -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0.5"
+                android:gravity="start">
+                <TextView
+                    android:id="@+id/tv_countdown_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Years: 1"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_countdown_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Months: 10"
+                    android:textAlignment="textStart"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/tv_countdown_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Days: 30"
+                    android:textAlignment="textStart"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+
+            </LinearLayout>
+
+            <!-- Right Side Texts -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0.5"
+                android:gravity="start"
+                >
+                <TextView
+                    android:id="@+id/tv_countdown_hours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Hours: 23"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+                <TextView
+                    android:id="@+id/tv_countdown_minutes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Minutes: 60"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+                <TextView
+                    android:id="@+id/tv_countdown_seconds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Seconds: 30"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
     </LinearLayout>
-    
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -41,7 +138,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_start_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
