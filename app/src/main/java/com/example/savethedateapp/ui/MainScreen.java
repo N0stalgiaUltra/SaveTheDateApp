@@ -1,5 +1,7 @@
 package com.example.savethedateapp.ui;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ import com.example.savethedateapp.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -34,6 +38,9 @@ public class MainScreen extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private LinearLayout textsLayout;
 
+    private DatePickerDialog datePickerDialog;
+    private Button dateButton;
+    private Button hourButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +72,18 @@ public class MainScreen extends AppCompatActivity {
                 StartCountdown();
             }
         });
+
+        //Seletor de datas
+        dateButton = findViewById(R.id.btn_pick_data);
+        dateButton.setText(getTodayDate());
+        initDatePicker();
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDatePicker();
+            }
+        });
+        //TODO:Implementar o Hour Button em conjunto com o Date Button
     }
 
     private void StartCountdown(){
@@ -110,7 +129,7 @@ public class MainScreen extends AppCompatActivity {
         }
 
     }
-
+    /*TODO: Acertar o numero de zeros para as horas e minutos*/
     private String formatTime(long milis, char type){
 
         switch(type){
@@ -123,5 +142,35 @@ public class MainScreen extends AppCompatActivity {
             default: return "";
         }
 
+    }
+
+
+    private void initDatePicker(){
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month+1;
+                dateButton.setText(day + "/" + month + "/" + year);
+            }
+        };
+
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        datePickerDialog = new DatePickerDialog(this, dateSetListener, year, month, day);
+    }
+    private void openDatePicker(){
+        datePickerDialog.show();
+    }
+
+    private String getTodayDate(){
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        month = month+1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        return day + "/" + month + "/" + year;
     }
 }
