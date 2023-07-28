@@ -2,6 +2,7 @@ package com.example.savethedateapp.ui;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,13 +16,16 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.example.savethedateapp.R;
+import com.google.api.services.calendar.model.TimePeriod;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class MainScreen extends AppCompatActivity {
@@ -39,9 +43,14 @@ public class MainScreen extends AppCompatActivity {
     private LinearLayout textsLayout;
 
     private DatePickerDialog datePickerDialog;
+    private TimePickerDialog hourPickerDialog;
     private Button dateButton;
     private Button hourButton;
 
+    private String selectedDate = "";
+    private String selectedTime = "";
+    int hour = 0;
+    int minute = 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,12 +92,23 @@ public class MainScreen extends AppCompatActivity {
                 openDatePicker();
             }
         });
-        //TODO:Implementar o Hour Button em conjunto com o Date Button
+
+        hourButton = findViewById(R.id.btn_pick_hour);
+        hourButton.setText(getTodayHour());
+
+        hourButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                pickHour();
+            }
+
+        });
     }
 
     private void StartCountdown(){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String targetDateString = "2023-07-27 22:35:00";
+        //String targetDateString = "2023-07-27 22:35:00";
+        String targetDateString = selectedDate+selectedTime;
 
         try {
             Date targetDateTime = dateFormat.parse(targetDateString);
@@ -150,6 +170,7 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month+1;
+                selectedDate = year+"-"+month+"-"+day+" ";
                 dateButton.setText(day + "/" + month + "/" + year);
             }
         };
@@ -172,5 +193,29 @@ public class MainScreen extends AppCompatActivity {
         month = month+1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         return day + "/" + month + "/" + year;
+    }
+
+    private void pickHour(){
+
+        TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selected_hour, int selected_minutes) {
+                hour = selected_hour;
+                minute = selected_minutes;
+                selectedTime = String.format("%02d:%02d:00", hour, minute);
+                hourButton.setText(String.format(Locale.getDefault(), "%02d:%02d", hour, minute));
+            }
+        };
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, timeSetListener, hour, minute, true);
+        timePickerDialog.show();
+    }
+
+
+    private String getTodayHour(){
+        Calendar calendar = Calendar.getInstance();
+        int currHour = calendar.get(Calendar.HOUR_OF_DAY);
+        int currMin = calendar.get(Calendar.MINUTE);
+        return String.format(Locale.getDefault(), "%02d:%02d", currHour, currMin);
     }
 }
